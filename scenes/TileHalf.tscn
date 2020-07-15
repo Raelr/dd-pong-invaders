@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/CheckerMarkLight.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/CheckerMarkDark.png" type="Texture" id=2]
+[ext_resource path="res://scripts/TileHalf.gd" type="Script" id=3]
+
+[node name="TileHalf" type="Node2D"]
+script = ExtResource( 3 )
+dark_color = Color( 1, 1, 1, 1 )
+light_color = Color( 1, 1, 1, 1 )
+
+[node name="CheckerMarkDark" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="CheckerMarkLight" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
