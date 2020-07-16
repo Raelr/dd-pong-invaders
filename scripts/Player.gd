@@ -1,6 +1,8 @@
 tool
 extends Sprite
 
+var is_paused : bool = false
+
 export (bool) var is_player_one
 export (bool) var is_player_two
 export (bool) var update
@@ -14,8 +16,9 @@ func _ready():
 	pass
 
 func _process(delta):
-	control_player(delta)
-	catchUserShootInput()
+	if not is_paused:
+		control_player(delta)
+		catchUserShootInput()
 	
 	if update:
 		if Engine.editor_hint:
