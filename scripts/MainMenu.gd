@@ -1,5 +1,7 @@
 extends Control
 
+signal on_start
+
 export (NodePath) var game_scene
 
 func _ready():
@@ -7,9 +9,7 @@ func _ready():
 	$QuitButton.connect("on_press", self, "exit_game")
 
 func start_game():
-	get_parent().get_node("Arena").visible = true
-	get_parent().get_node("PlayerOne").visible = true
-	get_parent().get_node("PlayerTwo").visible = true
+	emit_signal("on_start")
 	visible = false
 
 func exit_game():

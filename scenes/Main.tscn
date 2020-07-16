@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Arena.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/PlayerLeft.png" type="Texture" id=3]
 [ext_resource path="res://scenes/MainMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/GameManager.gd" type="Script" id=5]
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color( 0, 0, 0, 1 )
@@ -33,7 +35,12 @@ is_player_one = true
 
 [node name="PlayerTwo" parent="." instance=ExtResource( 2 )]
 visible = false
-position = Vector2( 799.479, 167.948 )
+position = Vector2( 799.479, 107.948 )
 texture = ExtResource( 3 )
 is_player_two = true
 update = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+position = Vector2( 515.571, 296.694 )
+zoom = Vector2( 0.616, 0.733 )
