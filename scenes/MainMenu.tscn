@@ -32,13 +32,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" parent="." instance=ExtResource( 2 )]
+[node name="PlayButton" parent="." instance=ExtResource( 2 )]
 position = Vector2( 155.765, 154.81 )
 scale = Vector2( 0.528957, 0.528957 )
 button_text = "Play"
 update = true
 
-[node name="Button2" parent="." instance=ExtResource( 2 )]
+[node name="QuitButton" parent="." instance=ExtResource( 2 )]
 position = Vector2( 155.765, 229.046 )
 scale = Vector2( 0.528957, 0.528957 )
 button_text = "Quit"
