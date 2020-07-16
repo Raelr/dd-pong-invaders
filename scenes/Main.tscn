@@ -18,10 +18,11 @@ margin_right = 354.279
 margin_bottom = 160.259
 
 [node name="PlayerOne" parent="." instance=ExtResource( 2 )]
-position = Vector2( 238.875, 294.948 )
+position = Vector2( 238.875, 348.948 )
 is_player_one = true
 
 [node name="PlayerTwo" parent="." instance=ExtResource( 2 )]
-position = Vector2( 799.479, 294.948 )
+position = Vector2( 799.479, 242.948 )
 texture = ExtResource( 3 )
+is_player_two = true
 update = true
