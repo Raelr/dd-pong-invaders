@@ -7,6 +7,8 @@ export (bool) var update
 export (Array) var playerTextures
 export (int) var playerMovementSpeed
 
+var barricade = preload("res://scenes/Barricade.tscn")
+
 func _ready():
 	pass
 
@@ -31,24 +33,28 @@ func control_player(delta):
 		elif Input.is_key_pressed(KEY_K) and not Input.is_key_pressed(KEY_I):
 			if (self.position.y < 483.579):
 				self.position.y += 5
-				
-var barricade = preload("res://scenes/Barricade.tscn")
 
-func spawn_barricade():
-	var player_position = transform.origin
-	var player_forward_vector = player_position.x
-	var barricade_instance = barricade.instance()
-	get_tree().get_root().add_child(barricade_instance)
-	if (is_player_one):
-		if Input.is_key_pressed(KEY_E):
-			player_forward_vector = player_forward_vector.normalized()
-			var spawn_position = player_position
-			barricade_instance.position.x += (player_forward_vector.x * 3)
-			barricade_instance.transform.origin = spawn_position
-	elif (is_player_two):
-		if Input.is_key_pressed(KEY_O):
-			player_forward_vector = player_forward_vector.normalized()
-			var spawn_position = player_position
-			barricade_instance.position.x -= player_forward_vector.x * 3
-			barricade_instance.transform.origin = spawn_position
+	if Input.is_action_just_pressed("playerAction"):
+		spawn_barricade()
+	elif Input.is_action_just_pressed("playerTwoAction"):
+		spawn_barricade(false)
 
+func spawn_barricade(p1 = true):
+	if is_player_one and p1:
+		var player_position = transform.origin
+		var player_forward_vector = player_position
+		var barricade_instance = barricade.instance()
+		get_tree().get_root().add_child(barricade_instance)
+		player_forward_vector = player_forward_vector.normalized()
+		var spawn_position = player_position
+		barricade_instance.position.x += (player_forward_vector.x * 3)
+		barricade_instance.transform.origin = spawn_position
+	elif is_player_two and not p1:
+		var player_position = transform.origin
+		var player_forward_vector = player_position
+		var barricade_instance = barricade.instance()
+		get_tree().get_root().add_child(barricade_instance)
+		player_forward_vector = player_forward_vector.normalized()
+		var spawn_position = player_position
+		barricade_instance.position.x -= player_forward_vector.x * 3
+		barricade_instance.transform.origin = spawn_position
