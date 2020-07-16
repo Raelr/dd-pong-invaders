@@ -1,23 +1,46 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Arena.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/PlayerLeft.png" type="Texture" id=3]
+[ext_resource path="res://scenes/MainMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/GameManager.gd" type="Script" id=5]
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1022.0
+margin_bottom = 598.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" parent="." instance=ExtResource( 4 )]
+margin_left = 489.393
+margin_top = 251.747
+margin_right = 489.393
+margin_bottom = 251.747
 
 [node name="Arena" parent="." instance=ExtResource( 1 )]
+visible = false
 position = Vector2( 516.893, 297.052 )
 
 [node name="PlayerOne" parent="." instance=ExtResource( 2 )]
-position = Vector2( 238.875, 388.271 )
+visible = false
+position = Vector2( 238.875, 484.948 )
 is_player_one = true
 update = true
-playerMovementSpeed = 240
 
 [node name="PlayerTwo" parent="." instance=ExtResource( 2 )]
-position = Vector2( 799.479, 107.948 )
+visible = false
+position = Vector2( 799.479, 109.948 )
 texture = ExtResource( 3 )
-is_player_two = true
 update = true
-playerMovementSpeed = 240
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+position = Vector2( 515.571, 296.694 )
+zoom = Vector2( 0.616, 0.733 )

@@ -11,7 +11,7 @@ texture = ExtResource( 2 )
 
 [node name="TileHalfRight" parent="." instance=ExtResource( 1 )]
 position = Vector2( 143.451, 0 )
-dark_color = Color( 0.282353, 0.54902, 0.545098, 1 )
+dark_color = Color( 0.242233, 0.488281, 0.484662, 1 )
 light_color = Color( 0.572549, 0.894118, 0.980392, 1 )
 
 [node name="TileHalfLeft" parent="." instance=ExtResource( 1 )]
