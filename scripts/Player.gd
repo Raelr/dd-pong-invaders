@@ -32,5 +32,23 @@ func control_player(delta):
 			if (self.position.y < 483.579):
 				self.position.y += 5
 				
+var barricade = preload("res://scenes/Barricade.tscn")
 
-	
+func spawn_barricade():
+	var player_position = transform.origin
+	var player_forward_vector = player_position.x
+	var barricade_instance = barricade.instance()
+	get_tree().get_root().add_child(barricade_instance)
+	if (is_player_one):
+		if Input.is_key_pressed(KEY_E):
+			player_forward_vector = player_forward_vector.normalized()
+			var spawn_position = player_position
+			barricade_instance.position.x += (player_forward_vector.x * 3)
+			barricade_instance.transform.origin = spawn_position
+	elif (is_player_two):
+		if Input.is_key_pressed(KEY_O):
+			player_forward_vector = player_forward_vector.normalized()
+			var spawn_position = player_position
+			barricade_instance.position.x -= player_forward_vector.x * 3
+			barricade_instance.transform.origin = spawn_position
+
