@@ -15,6 +15,6 @@ is_player_one = true
 update = true
 
 [node name="PlayerTwo" parent="." instance=ExtResource( 2 )]
-position = Vector2( 799.479, 269.948 )
+position = Vector2( 799.479, 259.948 )
 texture = ExtResource( 3 )
 update = true
