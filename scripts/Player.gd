@@ -104,12 +104,14 @@ func _on_Player2D_area_entered(area):
 			var timer = recoilTimer(2, "playerOneRecovered")
 			timer.start()
 			isPlayerOneStunned = true
+			get_parent().player_one_stunned = true
 			area.queue_free()
 	else:
 		if (area.isBullet() and area.getBulletOwner() == "playerOne"):
 			var timer = recoilTimer(2, "playerTwoRecovered")
 			timer.start()
 			isPlayerTwoStunned = true
+			get_parent().player_two_stunned = true
 			area.queue_free()
 	pass # Replace with function body.
 

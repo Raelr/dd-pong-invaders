@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/TileHalf.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/ArenaOutline.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ArenaManager.gd" type="Script" id=3]
+[ext_resource path="res://fonts/VPPixel-Simplified.otf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 4 )
 
 [node name="Arena" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="ArenaOutline" type="Sprite" parent="."]
 scale = Vector2( 3.03, 3.055 )
@@ -13,9 +20,34 @@ texture = ExtResource( 2 )
 position = Vector2( 143.451, 0 )
 dark_color = Color( 0.242233, 0.488281, 0.484662, 1 )
 light_color = Color( 0.572549, 0.894118, 0.980392, 1 )
+duration = 1.0
 
 [node name="TileHalfLeft" parent="." instance=ExtResource( 1 )]
 position = Vector2( -144.447, 0 )
 dark_color = Color( 0.552941, 0.313726, 0.313726, 1 )
 light_color = Color( 0.980392, 0.698039, 0.698039, 1 )
-update = true
+duration = 0.5
+
+[node name="PlayerTwoTimer" type="Label" parent="."]
+modulate = Color( 0, 0.223529, 0.321569, 1 )
+margin_left = 119.08
+margin_top = -78.7556
+margin_right = 169.08
+margin_bottom = 66.2444
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerOneTimer" type="Label" parent="."]
+modulate = Color( 0.533333, 0, 0, 1 )
+margin_left = -168.709
+margin_top = -78.7556
+margin_right = -118.709
+margin_bottom = 66.2444
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}

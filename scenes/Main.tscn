@@ -9,6 +9,7 @@
 [node name="Main" type="Node2D"]
 script = ExtResource( 5 )
 change_interval = 10.0
+stun_interval = 5.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1022.0
@@ -31,16 +32,16 @@ position = Vector2( 516.893, 297.052 )
 
 [node name="PlayerOne" parent="." instance=ExtResource( 2 )]
 visible = false
-position = Vector2( 238.875, 484.948 )
+position = Vector2( 238.875, 504.065 )
 is_player_one = true
-playerMovementSpeed = 0.0
+playerMovementSpeed = 240
 
 [node name="PlayerTwo" parent="." instance=ExtResource( 2 )]
 visible = false
 position = Vector2( 799.479, 109.948 )
 texture = ExtResource( 3 )
 update = true
-playerMovementSpeed = 0.0
+playerMovementSpeed = 240
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
