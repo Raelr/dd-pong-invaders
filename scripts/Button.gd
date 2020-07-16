@@ -5,6 +5,8 @@ signal on_press
 
 export (String) var button_text
 export (bool) var update
+export (Color) var normal_color
+export (Color) var hover_color
 
 func _ready():
 	update_label()
@@ -17,18 +19,15 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 
 func update_label():
 	$ButtonLabel.text = button_text
+	$ButtonLabel.modulate = normal_color
 
 func _process(delta):
 	if update:
 		if Engine.editor_hint:
 			update_label()
 
-
 func _on_Button_mouse_entered():
-	$ButtonLabel.modulate = Color(0.0, 0.0, 0.0, 1.0)
-
-
-
+	$ButtonLabel.modulate = hover_color
 
 func _on_Button_mouse_exited():
-	$ButtonLabel.modulate = Color(1.0,1.0,1.0,1.0)
+	$ButtonLabel.modulate = normal_color

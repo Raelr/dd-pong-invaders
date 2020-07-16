@@ -7,15 +7,24 @@
 
 [node name="Main" type="Node2D"]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_right = 1024.0
+margin_bottom = 601.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Arena" parent="." instance=ExtResource( 1 )]
 visible = false
 position = Vector2( 516.893, 297.052 )
 
 [node name="MainMenu" parent="." instance=ExtResource( 4 )]
-margin_left = 211.674
-margin_top = 13.8666
-margin_right = 211.674
-margin_bottom = 13.8666
+margin_left = 482.123
+margin_top = 248.194
+margin_right = 482.123
+margin_bottom = 248.194
 
 [node name="PlayerOne" parent="." instance=ExtResource( 2 )]
 visible = false
@@ -24,7 +33,7 @@ is_player_one = true
 
 [node name="PlayerTwo" parent="." instance=ExtResource( 2 )]
 visible = false
-position = Vector2( 799.479, 202.948 )
+position = Vector2( 799.479, 167.948 )
 texture = ExtResource( 3 )
 is_player_two = true
 update = true
