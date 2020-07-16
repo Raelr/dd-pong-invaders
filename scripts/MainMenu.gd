@@ -3,5 +3,10 @@ extends Control
 export (NodePath) var game_scene
 
 func _ready():
-	pass
+	$PlayButton.connect("on_press", self, "start_game")
 
+func start_game():
+	get_parent().get_node("Arena").visible = true
+	get_parent().get_node("PlayerOne").visible = true
+	get_parent().get_node("PlayerTwo").visible = true
+	visible = false

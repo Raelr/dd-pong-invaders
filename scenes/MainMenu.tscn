@@ -22,10 +22,9 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-margin_top = -0.706177
+margin_top = 1.608
 margin_right = 606.0
-margin_bottom = 144.294
-rect_scale = Vector2( 0.568447, 0.568447 )
+margin_bottom = 146.608
 custom_fonts/font = SubResource( 1 )
 text = "Pong Invaders"
 __meta__ = {
@@ -33,12 +32,10 @@ __meta__ = {
 }
 
 [node name="PlayButton" parent="." instance=ExtResource( 2 )]
-position = Vector2( 155.765, 154.81 )
-scale = Vector2( 0.528957, 0.528957 )
+position = Vector2( 266.846, 311.018 )
 button_text = "Play"
 update = true
 
 [node name="QuitButton" parent="." instance=ExtResource( 2 )]
-position = Vector2( 155.765, 229.046 )
-scale = Vector2( 0.528957, 0.528957 )
+position = Vector2( 266.846, 432.695 )
 button_text = "Quit"
