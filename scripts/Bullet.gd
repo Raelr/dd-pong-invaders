@@ -14,5 +14,5 @@ func _physics_process(delta):
 		sin(rotation) * speed * delta
 	)
 
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+func _on_Bullet_body_enter(body):
+	print("yes")

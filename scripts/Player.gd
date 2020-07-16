@@ -45,10 +45,9 @@ func shootBullet(angle):
 	
 	get_parent().add_child(bullet)
 
-
 func onRecoilTimerStopped():
 	canShoot = true
-	
+
 func control_player(delta):
 	if (is_player_one):
 		if Input.is_key_pressed(KEY_W) and not Input.is_key_pressed(KEY_S):
