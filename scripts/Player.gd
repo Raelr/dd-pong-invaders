@@ -9,6 +9,7 @@ export (bool) var update
 export (Array) var playerTextures
 export (float) var playerMovementSpeed
 
+var bullet_time_multiplier = 0
 var y_upper_boundary = 483.57
 var y_lower_boundary = 111.373
 var timer = 0
@@ -26,10 +27,8 @@ func _ready():
 
 func _process(delta):
 	
-	
 	if not is_paused:
 		control_player(delta)
-		increase_speed()
 
 	if update:
 		if Engine.editor_hint:
@@ -54,6 +53,8 @@ func debounceShot(angle, player):
 
 func shootBullet(angle, player):
 	var bullet = Bullet.instance()
+	
+	bullet.speed += bullet_time_multiplier
 	
 	bullet.start(global_position, angle, player)
 	
@@ -82,11 +83,8 @@ func control_player(delta):
 			
 #Speed increased by every minute
 func increase_speed():
-	timer += 1
-	if (timer / 60000 == 1):
-		playerMovementSpeed += 50
-		timer = 0
-		
+	playerMovementSpeed += 50
+	bullet_time_multiplier += 50
 
 func recoilTimer(time, callback):
 
