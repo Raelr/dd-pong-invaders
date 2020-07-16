@@ -8,45 +8,40 @@ export (Array) var playerTextures
 export (int) var playerMovementSpeed
 
 var Bullet = preload("res://scenes/Bullet.tscn")
-var BulletInterval = 0.3
-
-var recoilTimer
-var bulletSpawnFrom
-
-var mousePosition
-var aimPosition
-
 var canShoot = true
-
-var bullet
 
 func _ready():
 	pass
 
 func _process(delta):
 	control_player(delta)
+	catchUserShootInput()
 	
 	if update:
 		if Engine.editor_hint:
 			texture = playerTextures[0] if (is_player_one) else playerTextures[1]
 
-func _input(event):
-	if event is InputEventMouseButton:
-		mousePressed(event)
+func catchUserShootInput():
+	if (is_player_one):
+		if Input.is_key_pressed(KEY_F):
+			debounceShot(0)
+	else:
+		if Input.is_key_pressed(KEY_H):
+			debounceShot(PI)
 
-func mousePressed(event):
+func debounceShot(angle):
 	if canShoot:
-		print("Mouse pressed")
-		shootBullet(event)
+		shootBullet(angle)
 		
-		# recoilTimer.start()
-		# canShoot = false
+		var recoilTimer = recoilTimer(1, "onRecoilTimerStopped")
+		recoilTimer.start()
+		canShoot = false
 
 
-func shootBullet(event):
+func shootBullet(angle):
 	var bullet = Bullet.instance()
 	
-	bullet.start(global_position, rotation)
+	bullet.start(global_position, angle)
 	
 	get_parent().add_child(bullet)
 
@@ -62,10 +57,21 @@ func control_player(delta):
 		elif Input.is_key_pressed(KEY_S) and not Input.is_key_pressed(KEY_W):
 			if (self.position.y < 483.579):
 				self.position.y += 5
-	elif (is_player_two):
+	else:
 		if Input.is_key_pressed(KEY_I) and not Input.is_key_pressed(KEY_K):
 			if (self.position.y > 111.373):
 				self.position.y -= 5
 		elif Input.is_key_pressed(KEY_K) and not Input.is_key_pressed(KEY_I):
 			if (self.position.y < 483.579):
 				self.position.y += 5
+
+func recoilTimer(time, callback):
+
+	var timer = Timer.new()
+	timer.set_one_shot(true)
+	timer.connect("timeout", self, callback)
+	timer.set_wait_time(time)
+	
+	self.add_child(timer)
+	
+	return timer
