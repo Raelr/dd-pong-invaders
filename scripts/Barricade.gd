@@ -1,17 +1,14 @@
 extends Node2D
-
-var screen_size
-var extents
-var textures = {'1':['res://sprites/haystack.png'],
-				'2':['res://sprites/wood.png']}
+#var textures = {'1':['res://sprites/haystack.png'],
+#				'2':['res://sprites/wood.png']}
 
 func _ready():
 	add_to_group("barricade")
-	init('1')
-	
-func init(level):
-	var texture = load(textures[level])
-	get_node("barricade").set_texture(texture)
+#	init('1')
+#
+#func init(level):
+#	var texture = load(textures[level])
+#	get_node("barricade").set_texture(texture)
 	
 func explode():
 	queue_free()

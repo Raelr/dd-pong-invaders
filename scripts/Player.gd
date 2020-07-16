@@ -79,7 +79,35 @@ func control_player(delta):
 		elif Input.is_key_pressed(KEY_K) and not Input.is_key_pressed(KEY_I):
 			if (self.position.y < y_upper_boundary):
 				self.position.y += playerMovementSpeed * delta
-			
+	
+	if Input.is_action_just_pressed("playerAction"):
+		spawn_barricade()
+	elif Input.is_action_just_pressed("playerTwoAction"):
+		spawn_barricade(false)
+
+#Build Barricade
+var barricade = preload("res://scenes/Barricade.tscn")
+func spawn_barricade(p1 = true):
+	if is_player_one and p1:
+		var player_position = transform.origin
+		var barricade_instance = barricade.instance()
+		var spawn_position = Vector2()
+		get_tree().get_root().add_child(barricade_instance)
+		spawn_position.x = player_position.x
+		spawn_position.y = player_position.y
+		barricade_instance.transform.origin = spawn_position
+		print(spawn_position)
+		
+	elif not is_player_one and not p1:
+		var player_position = transform.origin
+		var barricade_instance = barricade.instance()
+		var spawn_position = Vector2()
+		get_tree().get_root().add_child(barricade_instance)
+		spawn_position.x = 730
+		spawn_position.y = player_position.y
+		barricade_instance.transform.origin = spawn_position
+		print(spawn_position)
+		
 #Speed increased by every minute
 func increase_speed():
 	timer += 1
