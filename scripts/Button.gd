@@ -14,7 +14,7 @@ func _ready():
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.pressed:
-			if Input.is_action_just_pressed("lmb"):
+			if Input.is_action_just_pressed("fire"):
 				emit_signal("on_press")
 
 func update_label():

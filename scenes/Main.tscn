@@ -10,34 +10,34 @@
 script = ExtResource( 5 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 0, 0, 0, 1 )
-margin_right = 1024.0
-margin_bottom = 601.0
+margin_right = 1022.0
+margin_bottom = 598.0
 mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MainMenu" parent="." instance=ExtResource( 4 )]
+margin_left = 489.393
+margin_top = 251.747
+margin_right = 489.393
+margin_bottom = 251.747
 
 [node name="Arena" parent="." instance=ExtResource( 1 )]
 visible = false
 position = Vector2( 516.893, 297.052 )
 
-[node name="MainMenu" parent="." instance=ExtResource( 4 )]
-margin_left = 482.123
-margin_top = 248.194
-margin_right = 482.123
-margin_bottom = 248.194
-
 [node name="PlayerOne" parent="." instance=ExtResource( 2 )]
 visible = false
-position = Vector2( 238.875, 483.948 )
+position = Vector2( 238.875, 484.948 )
 is_player_one = true
+update = true
 
 [node name="PlayerTwo" parent="." instance=ExtResource( 2 )]
 visible = false
-position = Vector2( 799.479, 107.948 )
+position = Vector2( 799.479, 269.948 )
 texture = ExtResource( 3 )
-is_player_two = true
 update = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Sprites/CheckerMarkLight.png" type="Texture" id=1]
-[ext_resource path="res://Sprites/CheckerMarkDark.png" type="Texture" id=2]
+[ext_resource path="res://sprites/CheckerMarkLight.png" type="Texture" id=1]
+[ext_resource path="res://sprites/CheckerMarkDark.png" type="Texture" id=2]
 [ext_resource path="res://scripts/TileHalf.gd" type="Script" id=3]
 
 [node name="TileHalf" type="Node2D"]
