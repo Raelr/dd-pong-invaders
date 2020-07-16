@@ -80,7 +80,52 @@ func control_player(delta):
 		elif Input.is_key_pressed(KEY_K) and not Input.is_key_pressed(KEY_I):
 			if (self.position.y < y_upper_boundary):
 				self.position.y += playerMovementSpeed * delta
-			
+	if Input.is_action_just_pressed("playerActive"):
+		spawn_barricade()
+	elif Input.is_action_just_pressed("playerTwoActive"):
+		spawn_barricade(false)
+#Build Barricade
+var barricade = preload("res://scenes/Barricade.tscn")
+var barricadev2 = preload("res://scenes/BarricadeV2.tscn")
+
+const max_barricade_P1 = 2
+const max_barricade_P2 = 2
+
+func spawn_barricade(p1 = true):
+	if is_player_one and p1:
+		var barricade_count = []
+		var player_position = transform.origin
+		var barricade_instance = barricade.instance()
+		var spawn_position = Vector2()
+		get_tree().get_root().add_child(barricade_instance)
+		if (get_tree().get_nodes_in_group("barricade").size()) <= max_barricade_P1:
+			spawn_position.x = 300
+			spawn_position.y = player_position.y
+			barricade_instance.transform.origin = spawn_position
+			print(spawn_position)
+			barricade_count.append(barricade_instance)
+		else:
+			print("No more barricades")
+#		spawn_position.x = 300
+#		spawn_position.y = player_position.y
+#		barricade_instance.transform.origin = spawn_position
+#		print(spawn_position)
+		
+	elif not is_player_one and not p1:
+		var barricadev2_count = []
+		var player_position = transform.origin
+		var barricadev2_instance = barricadev2.instance()
+		var spawn_position = Vector2()
+		get_tree().get_root().add_child(barricadev2_instance)
+		if (get_tree().get_nodes_in_group("barricadev2").size()) <= max_barricade_P2:
+			spawn_position.x = 730
+			spawn_position.y = player_position.y
+			barricadev2_instance.transform.origin = spawn_position
+			print(spawn_position)
+			barricadev2_count.append(barricadev2_instance)
+		else:
+			print("No more barricades")
+
 #Speed increased by every minute
 func increase_speed():
 	playerMovementSpeed += 50
