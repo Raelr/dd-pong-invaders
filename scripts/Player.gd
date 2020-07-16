@@ -11,6 +11,8 @@ export (int) var playerMovementSpeed
 
 var Bullet = preload("res://scenes/Bullet.tscn")
 var canShoot = true
+var isPlayerOneStunned = false
+var isPlayerTwoStunned = false
 
 func _ready():
 	pass
@@ -27,40 +29,41 @@ func _process(delta):
 func catchUserShootInput():
 	if (is_player_one):
 		if Input.is_key_pressed(KEY_F):
-			debounceShot(0)
+			debounceShot(0, "playerOne")
 	else:
 		if Input.is_key_pressed(KEY_H):
-			debounceShot(PI)
+			debounceShot(PI, "playerTwo")
 
-func debounceShot(angle):
+func debounceShot(angle, player):
 	if canShoot:
-		shootBullet(angle)
+		shootBullet(angle, player)
 		
 		var recoilTimer = recoilTimer(1, "onRecoilTimerStopped")
 		recoilTimer.start()
 		canShoot = false
 
 
-func shootBullet(angle):
+func shootBullet(angle, player):
 	var bullet = Bullet.instance()
 	
-	bullet.start(global_position, angle)
+	bullet.start(global_position, angle, player)
 	
 	get_parent().add_child(bullet)
 
-
 func onRecoilTimerStopped():
 	canShoot = true
-	
+
 func control_player(delta):
-	if (is_player_one):
+	if (is_player_one and !isPlayerOneStunned):
+		catchUserShootInput()
 		if Input.is_key_pressed(KEY_W) and not Input.is_key_pressed(KEY_S):
 			if (self.position.y > 111.373):
 				self.position.y -= 5
 		elif Input.is_key_pressed(KEY_S) and not Input.is_key_pressed(KEY_W):
 			if (self.position.y < 483.579):
 				self.position.y += 5
-	else:
+	elif (!is_player_one and !isPlayerTwoStunned):		
+		catchUserShootInput()
 		if Input.is_key_pressed(KEY_I) and not Input.is_key_pressed(KEY_K):
 			if (self.position.y > 111.373):
 				self.position.y -= 5
@@ -78,3 +81,26 @@ func recoilTimer(time, callback):
 	self.add_child(timer)
 	
 	return timer
+
+
+func _on_Player2D_area_entered(area):
+	if (is_player_one):
+		if (area.isBullet() and area.getBulletOwner() == "playerTwo"):			
+			var timer = recoilTimer(2, "playerOneRecovered")
+			timer.start()
+			isPlayerOneStunned = true
+			area.queue_free()
+	else:
+		if (area.isBullet() and area.getBulletOwner() == "playerOne"):
+			var timer = recoilTimer(2, "playerTwoRecovered")
+			timer.start()
+			isPlayerTwoStunned = true
+			area.queue_free()
+	pass # Replace with function body.
+
+func playerOneRecovered():
+	isPlayerOneStunned = false
+	
+func playerTwoRecovered():
+	isPlayerTwoStunned = false
+
