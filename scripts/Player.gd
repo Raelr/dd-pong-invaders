@@ -67,7 +67,6 @@ func control_player(delta):
 	if (is_player_one and !isPlayerOneStunned):
 		catchUserShootInput()
 		if Input.is_key_pressed(KEY_W) and not Input.is_key_pressed(KEY_S):
-			print("AAAAA")
 			if (self.position.y > y_lower_boundary):
 				self.position.y -= (playerMovementSpeed * delta)
 		elif Input.is_key_pressed(KEY_S) and not Input.is_key_pressed(KEY_W):

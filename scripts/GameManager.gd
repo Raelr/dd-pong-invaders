@@ -25,17 +25,19 @@ func _process(delta):
 			$Arena.switch_tile_colors()
 		if player_one_stunned:
 			elapsed_time_player_one += delta
-			$Arena.display_timer(true)
+			$Arena.display_timer(true, true)
 			if elapsed_time_player_one >= stun_interval:
 				elapsed_time_player_one = 0
 				player_one_stunned = false
+				$Arena.display_timer(true, false)
 			$Arena.increment_player_timer(elapsed_time_player_one, true)
 		if player_two_stunned:
 			elapsed_time_player_two += delta
-			$Arena.display_timer(false)
+			$Arena.display_timer(false, true)
 			if elapsed_time_player_two >= stun_interval:
 				elapsed_time_player_two = 0
 				player_two_stunned = false
+				$Arena.display_timer(false, false)
 			$Arena.increment_player_timer(elapsed_time_player_two, false)
 
 
