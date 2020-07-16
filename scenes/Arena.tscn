@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/TileHalf.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/ArenaOutline.png" type="Texture" id=2]
 [ext_resource path="res://scenes/ArenaManager.gd" type="Script" id=3]
 [ext_resource path="res://fonts/VPPixel-Simplified.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://sprites/ScoreBoard.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -11,10 +12,6 @@ font_data = ExtResource( 4 )
 
 [node name="Arena" type="Node2D"]
 script = ExtResource( 3 )
-
-[node name="ArenaOutline" type="Sprite" parent="."]
-scale = Vector2( 3.03, 3.055 )
-texture = ExtResource( 2 )
 
 [node name="TileHalfRight" parent="." instance=ExtResource( 1 )]
 position = Vector2( 143.451, 0 )
@@ -51,3 +48,12 @@ text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ArenaOutline" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="ScoreBoard" type="Sprite" parent="."]
+position = Vector2( 0.33181, -274.197 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )

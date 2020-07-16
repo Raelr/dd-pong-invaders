@@ -27,7 +27,7 @@ func _ready():
 
 func _process(delta):
 	
-	if not is_paused:
+	if not is_paused and !Engine.editor_hint:
 		control_player(delta)
 
 	if update:
@@ -67,6 +67,7 @@ func control_player(delta):
 	if (is_player_one and !isPlayerOneStunned):
 		catchUserShootInput()
 		if Input.is_key_pressed(KEY_W) and not Input.is_key_pressed(KEY_S):
+			print("AAAAA")
 			if (self.position.y > y_lower_boundary):
 				self.position.y -= (playerMovementSpeed * delta)
 		elif Input.is_key_pressed(KEY_S) and not Input.is_key_pressed(KEY_W):
