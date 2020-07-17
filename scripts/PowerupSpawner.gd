@@ -35,25 +35,9 @@ func power_up_generate():
 	var powerup = Powerup_Scene.instance()
 	get_tree().get_root().add_child(powerup)
 	
-	powerup.position = V2
-	powerup.start(2, 5.0)
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var type = rng.randf_range(0, 3)
 	
-# if is_expired true, remove the powerup with no action,
-# otherwise activate powerup for player
-func power_up_action(is_expired):
-	var rand_num = 0
-	if is_expired:
-		# remove existing powerup from the arena
-		pass
-	else:
-		# activate powerup
-		# random number 1-3
-		if rand_num == 1:
-			# powerup 1
-			pass
-		elif rand_num == 2:
-			# powerup 2
-			pass
-		else:
-			# powerup 3
-			pass
+	powerup.position = V2
+	powerup.start(type, 5.0)

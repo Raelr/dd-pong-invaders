@@ -20,8 +20,7 @@ var canShoot = true
 var isPlayerOneStunned = false
 var isPlayerTwoStunned = false
 
-var playerOneState = 0
-var playerTwoState = 0
+var playerState = 0
 
 var has_power_up : bool = false
 var powerup_duration : float = 0.0
@@ -53,6 +52,7 @@ func _process(delta):
 func reset_player():
 	# set player to unmodified state
 	has_power_up = false
+	playerState = 0
 
 func check_for_powerups(delta):
 	if has_power_up:
@@ -110,16 +110,10 @@ func trippleShot(angle, player):
 	get_parent().add_child(b3)
 
 func shootBullet(angle, player):
-	if player == "playerOne":
-		if playerOneState == 3:
-			trippleShot(angle, player)
-		else:
-			singleShot(angle, player)
+	if playerState == 3:
+		trippleShot(angle, player)
 	else:
-		if playerTwoState == 3:
-			trippleShot(angle, player)
-		else:
-			singleShot(angle, player)
+		singleShot(angle, player)
 
 func onRecoilTimerStopped():
 	canShoot = true
@@ -225,25 +219,15 @@ func activatePowerup(type : int, player: String):
 	if type == 0:
 		return
 	has_power_up = true
+	
+	playerState = type
+	
 	if type == 1:
-		print("Got powerup")
 		# invulnerability
 		powerup_duration = 2.0
-		if player == "playerOne":
-			playerOneState = 1
-		else:
-			playerTwoState = 1
 	elif type == 2:
 		# speed
-		powerup_duration = 5.0 
-		if player == "playerOne":
-			playerOneState = 2
-		else:
-			playerTwoState = 2
+		powerup_duration = 5.0
 	elif type == 3:
 		#shotgun
 		powerup_duration = 5.0
-		if player == "playerOne":
-			playerOneState = 3
-		else:
-			playerTwoState = 3
