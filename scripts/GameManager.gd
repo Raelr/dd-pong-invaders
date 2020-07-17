@@ -40,7 +40,6 @@ func _process(delta):
 				$Arena.display_timer(false, false)
 			$Arena.increment_player_timer(elapsed_time_player_two, false)
 
-
 func start() -> void:
 	$Arena.visible = true
 	$PlayerOne.visible = true
@@ -54,3 +53,6 @@ func set_paused_state(is_active : bool) -> void:
 	$PlayerOne.is_paused = is_active
 	$PlayerTwo.is_paused = is_active
 	$PowerupSpawner.is_paused = is_active
+
+func activate_powerup(type : int, player):
+	pass
