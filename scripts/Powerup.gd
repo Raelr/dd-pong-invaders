@@ -20,6 +20,6 @@ func _process(delta):
 func _on_Powerup_area_entered(area):
 	# Do stuff
 	if area.isBullet():
-		get_parent().get_node("Main/PlayerOne" if area.player == "playerOne" else "Main/PlayerTwo").activatePowerup(1)
+		get_parent().get_node("Main/PlayerOne" if area.player == "playerOne" else "Main/PlayerTwo").activatePowerup(3, area.getBulletOwner())
 		area.queue_free()
 		queue_free()

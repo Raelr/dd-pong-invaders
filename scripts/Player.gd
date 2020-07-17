@@ -27,6 +27,13 @@ var has_power_up : bool = false
 var powerup_duration : float = 0.0
 var powerup_elapsed_time : float = 0.0
 
+#Build Barricade
+var barricade = preload("res://scenes/Barricade.tscn")
+var barricadev2 = preload("res://scenes/BarricadeV2.tscn")
+
+const max_barricade_P1 = 2
+const max_barricade_P2 = 2
+
 func _ready():
 	if (playerMovementSpeed == 0):
 		playerMovementSpeed = 240 #default value for player movement speed
@@ -104,12 +111,12 @@ func trippleShot(angle, player):
 
 func shootBullet(angle, player):
 	if player == "playerOne":
-		if playerOneState == 2:
+		if playerOneState == 3:
 			trippleShot(angle, player)
 		else:
 			singleShot(angle, player)
 	else:
-		if playerTwoState == 2:
+		if playerTwoState == 3:
 			trippleShot(angle, player)
 		else:
 			singleShot(angle, player)
@@ -138,13 +145,6 @@ func control_player(delta):
 		spawn_barricade()
 	elif Input.is_action_just_pressed("playerTwoActive"):
 		spawn_barricade(false)
-
-#Build Barricade
-var barricade = preload("res://scenes/Barricade.tscn")
-var barricadev2 = preload("res://scenes/BarricadeV2.tscn")
-
-const max_barricade_P1 = 2
-const max_barricade_P2 = 2
 
 func spawn_barricade(p1 = true):
 	if is_player_one and p1:
@@ -220,21 +220,30 @@ func playerOneRecovered():
 func playerTwoRecovered():
 	isPlayerTwoStunned = false
 
-func activatePowerup(type : int):
+func activatePowerup(type : int, player: String):
 	# Set different powerup abilities based on the type that's passed in
 	if type == 0:
 		return
 	has_power_up = true
 	if type == 1:
 		print("Got powerup")
-		powerup_duration = 2.0
 		# invulnerability
-		pass
+		powerup_duration = 2.0
+		if player == "playerOne":
+			playerOneState = 1
+		else:
+			playerTwoState = 1
 	elif type == 2:
 		# speed
 		powerup_duration = 5.0 
-		pass
+		if player == "playerOne":
+			playerOneState = 2
+		else:
+			playerTwoState = 2
 	elif type == 3:
 		#shotgun
 		powerup_duration = 5.0
-		pass
+		if player == "playerOne":
+			playerOneState = 3
+		else:
+			playerTwoState = 3
