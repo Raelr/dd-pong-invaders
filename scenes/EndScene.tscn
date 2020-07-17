@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://fonts/VPPixel-Simplified.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/Button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/EndScene.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 228.19, 51.3599 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 228.19, 51.3599 )
+
+[node name="Control" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "[Player] won!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Replay" parent="." instance=ExtResource( 2 )]
+position = Vector2( 175.288, 213.839 )
+button_text = "Play again"
+update = true
+normal_color = Color( 1, 1, 1, 1 )
+hover_color = Color( 0.27451, 0.27451, 0.27451, 1 )
+
+[node name="CollisionShape2D" parent="Replay" index="0"]
+position = Vector2( 118.391, 0 )
+shape = SubResource( 2 )
+
+[node name="ButtonLabel" parent="Replay" index="1"]
+modulate = Color( 1, 1, 1, 1 )
+text = "Play again"
+
+[node name="Menu" parent="." instance=ExtResource( 2 )]
+position = Vector2( 153.328, 326.501 )
+button_text = "Main Menu"
+update = true
+normal_color = Color( 1, 1, 1, 1 )
+hover_color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="CollisionShape2D" parent="Menu" index="0"]
+position = Vector2( 140.351, 0 )
+shape = SubResource( 3 )
+
+[node name="ButtonLabel" parent="Menu" index="1"]
+modulate = Color( 1, 1, 1, 1 )
+text = "Main Menu"
+
+[node name="Quit" parent="." instance=ExtResource( 2 )]
+position = Vector2( 279.358, 437.254 )
+button_text = "Quit"
+update = true
+normal_color = Color( 1, 1, 1, 1 )
+hover_color = Color( 0.345098, 0.345098, 0.345098, 1 )
+
+[node name="CollisionShape2D" parent="Quit" index="0"]
+position = Vector2( -7.63818, 0 )
+
+[node name="ButtonLabel" parent="Quit" index="1"]
+modulate = Color( 1, 1, 1, 1 )
+text = "Quit"
+
+[editable path="Replay"]
+
+[editable path="Menu"]
+
+[editable path="Quit"]

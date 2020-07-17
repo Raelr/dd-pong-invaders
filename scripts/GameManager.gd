@@ -12,7 +12,6 @@ var player_one_stunned : bool = false
 var player_two_stunned : bool = false
 
 func _ready():
-	$MainMenu.connect("on_start", self, "start")
 	set_paused_state(true)
 
 func _process(delta):
