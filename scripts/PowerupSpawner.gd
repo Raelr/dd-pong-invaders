@@ -4,23 +4,17 @@ const Time_To_Power_Up = 5
 const Time_To_Disappear = 5
 
 var Elapsed_Time = 0
+var is_paused : bool = false
 
 var V2 = Vector2()
 
 var Powerup_Scene = preload("res://scenes/Powerup.tscn")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	Elapsed_Time += delta
-	power_up_init()
+	if not is_paused:
+		Elapsed_Time += delta
+		power_up_init()
 
 func power_up_init():
 	if Elapsed_Time >= Time_To_Power_Up:

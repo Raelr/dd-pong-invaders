@@ -36,4 +36,3 @@ func getBulletOwner():
 
 func _on_Bullet_area_entered(area):
 	print("disappear")
-	pass # Replace with function body.

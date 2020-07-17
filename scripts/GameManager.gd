@@ -53,4 +53,7 @@ func set_paused_state(is_active : bool) -> void:
 	print("Paused = " + ("true" if (is_active) else "false"))
 	$PlayerOne.is_paused = is_active
 	$PlayerTwo.is_paused = is_active
+	$PowerupSpawner.is_paused = is_active
 
+func activate_powerup():
+	pass

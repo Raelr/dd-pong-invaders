@@ -31,3 +31,6 @@ func _on_Button_mouse_entered():
 
 func _on_Button_mouse_exited():
 	$ButtonLabel.modulate = normal_color
+
+func isBullet():
+	return false
