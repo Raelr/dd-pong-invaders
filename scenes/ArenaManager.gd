@@ -1,5 +1,8 @@
 extends Node2D
 
+var playerOneHP = 100
+var playerTwoHP = 100
+
 func switch_tile_colors() -> void:
 	$TileHalfLeft.swap_colors()
 	$TileHalfRight.swap_colors()
@@ -16,14 +19,14 @@ func increment_player_timer(delta : float, is_player_one : bool) -> void:
 	else:
 		$PlayerTwoTimer.text = str(int(delta) + 1)
 		
-func get_player_one_hp():
-	return $PlayerOneHealth.value
+func lower_player_health(damage : int, isPlayerOne : bool):
+	if (isPlayerOne):
+		$PlayerOneHealth.value -= damage
+		return $PlayerOneHealth.value
+	else:
+		$PlayerTwoHealth.value -= damage
+		return $PlayerTwoHealth.value
+		
 
-func get_player_two_hp():
-	return $PlayerTwoHealth.value
+
 	
-func lower_player_one_hp(damage : int):
-	$PlayerOneHealth.value -= damage
-
-func lower_player_two_hp(damage : int):
-	$PlayerTwoHealth.value -= damage
