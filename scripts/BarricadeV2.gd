@@ -13,3 +13,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_Haystack_area_entered(area):
+	if area.isBullet() and area.getBulletOwner() == "playerOne":
+		self.queue_free()
+		area.queue_free()
