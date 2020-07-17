@@ -199,20 +199,23 @@ func recoilTimer(time, callback):
 
 func _on_Player2D_area_entered(area):
 	if (is_player_one):
-		if (area.isBullet() and area.getBulletOwner() == "playerTwo"):			
-			var timer = recoilTimer(2, "playerOneRecovered")
-			timer.start()
-			isPlayerOneStunned = true
-			get_parent().player_one_stunned = true
+		if (area.getBulletOwner() == "playerTwo"):
+			if (playerState != 1):
+				var timer = recoilTimer(5, "playerOneRecovered")
+				timer.start()
+				isPlayerOneStunned = true
+				get_parent().player_one_stunned = true
+				
 			area.queue_free()
 	else:
-		if (area.isBullet() and area.getBulletOwner() == "playerOne"):
-			var timer = recoilTimer(2, "playerTwoRecovered")
-			timer.start()
-			isPlayerTwoStunned = true
-			get_parent().player_two_stunned = true
+		if (area.getBulletOwner() == "playerOne"):
+			if (playerState != 1):
+				var timer = recoilTimer(5, "playerTwoRecovered")
+				timer.start()
+				isPlayerTwoStunned = true
+				get_parent().player_two_stunned = true
+				
 			area.queue_free()
-	pass # Replace with function body.
 
 func playerOneRecovered():
 	isPlayerOneStunned = false
