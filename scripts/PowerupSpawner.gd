@@ -33,7 +33,7 @@ func power_up_generate():
 	V2.y = rand2 + 300 - 150
 	
 	var powerup = Powerup_Scene.instance()
-	get_tree().get_root().add_child(powerup)
+	get_parent().add_child(powerup)
 	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()

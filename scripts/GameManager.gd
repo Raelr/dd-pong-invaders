@@ -12,7 +12,6 @@ var player_one_stunned : bool = false
 var player_two_stunned : bool = false
 
 func _ready():
-	$MainMenu.connect("on_start", self, "start")
 	set_paused_state(true)
 
 func _process(delta):
@@ -55,6 +54,6 @@ func set_paused_state(is_active : bool) -> void:
 	$PowerupSpawner.is_paused = is_active
 	
 func game_over(playerWon):
-	print(playerWon)
-	pass
+	get_parent().player_won(playerWon)
+	
 

@@ -24,19 +24,19 @@ func _physics_process(delta):
 	if (player == "playerOne"):
 		if (position.x > 830):
 			print("Player 1 scored")
-			if (get_parent().get_child(2).lower_player_health(10, false) == 0):
+			if (get_parent().get_child(0).lower_player_health(10, false) == 0):
 				get_parent().game_over("Player One")
 			
 			
 			self.queue_free()
-			get_parent().get_child(2).adjust(1,true)
+			get_parent().get_child(0).adjust(1,true)
 	else:
 		if (position.x < 200):
 			print("Player 2 scored")
-			if (get_parent().get_child(2).lower_player_health(10, true) == 0):
+			if (get_parent().get_child(0).lower_player_health(10, true) == 0):
 				get_parent().game_over("Player Two")
 			self.queue_free()
-			get_parent().get_child(2).adjust(1,false)
+			get_parent().get_child(0).adjust(1,false)
 
 func _on_Bullet_body_enter(body):
 	print("yes")
