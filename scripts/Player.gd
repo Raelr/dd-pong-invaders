@@ -153,7 +153,7 @@ func spawn_barricade(p1 = true):
 		var player_position = transform.origin
 		var barricade_instance = barricade.instance()
 		var spawn_position = Vector2()
-		get_tree().get_root().add_child(barricade_instance)
+		get_parent().add_child(barricade_instance)
 		if (get_tree().get_nodes_in_group("barricade").size()) <= max_barricade_P1:
 			spawn_position.x = 300
 			spawn_position.y = player_position.y

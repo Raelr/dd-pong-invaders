@@ -16,6 +16,9 @@ func _ready():
 func explode():
 	queue_free()
 
+func isBullet():
+	return false
+
 ## Destination for barricade build in Main
 # var barricade = preload("res://scenes/Barricade.tscn")
 # var player_position = PlayerOne.transform.origin
