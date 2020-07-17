@@ -19,8 +19,8 @@ var canShoot = true
 var isPlayerOneStunned = false
 var isPlayerTwoStunned = false
 
-var isPlayerOneTrippleShot = true
-var isPlayerTwoTrippleShot = false
+var playerOneState = 0
+var playerTwoState = 0
 
 func _ready():
 	if (playerMovementSpeed == 0):
@@ -86,12 +86,12 @@ func trippleShot(angle, player):
 
 func shootBullet(angle, player):
 	if player == "playerOne":
-		if isPlayerOneTrippleShot:
+		if playerOneState == 2:
 			trippleShot(angle, player)
 		else:
 			singleShot(angle, player)
 	else:
-		if isPlayerTwoTrippleShot:
+		if playerTwoState == 2:
 			trippleShot(angle, player)
 		else:
 			singleShot(angle, player)
@@ -202,3 +202,5 @@ func playerOneRecovered():
 func playerTwoRecovered():
 	isPlayerTwoStunned = false
 
+func activate_powerup():
+	print("activate powerup call")

@@ -19,5 +19,6 @@ func _process(delta):
 
 func _on_Powerup_area_entered(area):
 	# Do stuff
-	if area.isBullet():
-		pass
+	if area.isBullet():		
+		area.queue_free()
+		self.queue_free()

@@ -52,4 +52,3 @@ position = Vector2( 515.571, 236.963 )
 zoom = Vector2( 0.9, 0.925 )
 
 [node name="PowerupSpawner" parent="." instance=ExtResource( 6 )]
-visible = false
