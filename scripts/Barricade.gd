@@ -45,8 +45,6 @@ func isBullet():
 #		queue_free()
 #		body.explode()
 
-
-
 func _on_Barricade_area_entered(area):
 	if area.isBullet() and area.getBulletOwner() == "playerTwo":
 		self.queue_free()

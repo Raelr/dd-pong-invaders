@@ -5,13 +5,13 @@
 [ext_resource path="res://sprites/PlayerLeft.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.98164, 8.84749 )
 
 [node name="Player" type="Sprite"]
 scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 playerTextures = [ ExtResource( 1 ), ExtResource( 3 ) ]
-playerMovementSpeed = 240
 
 [node name="Player2D" type="Area2D" parent="."]
 

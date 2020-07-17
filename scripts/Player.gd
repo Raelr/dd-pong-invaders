@@ -32,8 +32,8 @@ var powerup_elapsed_time : float = 0.0
 var barricade = preload("res://scenes/Barricade.tscn")
 var barricadev2 = preload("res://scenes/BarricadeV2.tscn")
 
-const max_barricade_P1 = 2
-const max_barricade_P2 = 2
+const max_barricade_P1 = 5
+const max_barricade_P2 = 5
 
 func _ready():
 	if (playerMovementSpeed == 0):
@@ -172,7 +172,7 @@ func spawn_barricade(p1 = true):
 		var player_position = transform.origin
 		var barricadev2_instance = barricadev2.instance()
 		var spawn_position = Vector2()
-		get_tree().get_root().add_child(barricadev2_instance)
+		get_parent().add_child(barricadev2_instance)
 		if (get_tree().get_nodes_in_group("barricadev2").size()) <= max_barricade_P2:
 			spawn_position.x = 730
 			spawn_position.y = player_position.y

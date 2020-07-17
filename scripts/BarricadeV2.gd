@@ -14,8 +14,10 @@ func _ready():
 #func _process(delta):
 #	pass
 
+func isBullet():
+	return false
 
-func _on_Haystack_area_entered(area):
-	if area.isBullet() and area.getBulletOwner() == "playerOne":
+func _on_Haystack_area_entered(area):	
+	if (area.isBullet() and area.getBulletOwner() == "playerOne"):
 		self.queue_free()
 		area.queue_free()
