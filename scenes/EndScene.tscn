@@ -15,16 +15,32 @@ extents = Vector2( 228.19, 51.3599 )
 extents = Vector2( 228.19, 51.3599 )
 
 [node name="Control" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 204.262
+margin_top = 47.8336
+margin_right = 244.262
+margin_bottom = 87.8336
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 0.0323212
+anchor_bottom = 0.0323212
+margin_left = -259.442
+margin_top = -117.734
+margin_right = 876.558
+margin_bottom = 629.266
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Title" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = -72.3967
+margin_right = 488.603
+margin_bottom = 145.0
 custom_fonts/font = SubResource( 1 )
 text = "[Player] won!"
 __meta__ = {

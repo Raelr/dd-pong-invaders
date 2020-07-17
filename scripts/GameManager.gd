@@ -54,6 +54,6 @@ func set_paused_state(is_active : bool) -> void:
 	$PowerupSpawner.is_paused = is_active
 	
 func game_over(playerWon):
-	print(playerWon)
-	pass
+	get_parent().player_won(playerWon)
+	
 

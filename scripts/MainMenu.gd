@@ -2,8 +2,6 @@ extends Control
 
 signal on_start
 
-
-
 func _ready():
 	$PlayButton.connect("on_press", self, "start_game")
 	$QuitButton.connect("on_press", self, "exit_game")
@@ -19,7 +17,17 @@ func start_game():
 	var game = main_menu.instance()
 	add_child(game)
 	game.start()
-	
+
+func reactivate_menu():
+	$ColorRect.visible = true
+	$Title.visible = true
+	$PlayButton.visible = true
+	$PlayButton.monitoring = true
+	$PlayButton.monitoring = true
+	$QuitButton.visible = true
 
 func exit_game():
 	get_tree().quit()
+
+func player_won(player : String):
+	$EndScreen.display_quit_menu(player)
