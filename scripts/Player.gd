@@ -14,6 +14,8 @@ var y_upper_boundary = 483.57
 var y_lower_boundary = 111.373
 var timer = 0
 
+var recoilTime = 1
+
 var Bullet = preload("res://scenes/Bullet.tscn")
 var canShoot = true
 
@@ -44,6 +46,9 @@ func _process(delta):
 	if not is_paused and !Engine.editor_hint:
 		control_player(delta)
 		check_for_powerups(delta)
+		
+		if playerState == 2:
+			recoilTime = 0.5
 
 	if update:
 		if Engine.editor_hint:
@@ -52,6 +57,7 @@ func _process(delta):
 func reset_player():
 	# set player to unmodified state
 	has_power_up = false
+	recoilTime = 1
 	playerState = 0
 
 func check_for_powerups(delta):
@@ -79,7 +85,7 @@ func debounceShot(angle, player):
 	if canShoot:
 		shootBullet(angle, player)
 		
-		var recoilTimer = recoilTimer(1, "onRecoilTimerStopped")
+		var recoilTimer = recoilTimer(recoilTime, "onRecoilTimerStopped")
 		recoilTimer.start()
 		canShoot = false
 
