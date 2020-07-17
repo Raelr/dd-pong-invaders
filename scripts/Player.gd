@@ -16,11 +16,16 @@ var timer = 0
 
 var Bullet = preload("res://scenes/Bullet.tscn")
 var canShoot = true
+
 var isPlayerOneStunned = false
 var isPlayerTwoStunned = false
 
 var isPlayerOneTrippleShot = true
 var isPlayerTwoTrippleShot = false
+
+var has_power_up : bool = false
+var powerup_duration : float = 0.0
+var powerup_elapsed_time : float = 0.0
 
 func _ready():
 	if (playerMovementSpeed == 0):
@@ -32,10 +37,23 @@ func _process(delta):
 	
 	if not is_paused and !Engine.editor_hint:
 		control_player(delta)
+		check_for_powerups(delta)
 
 	if update:
 		if Engine.editor_hint:
 			texture = playerTextures[0] if (is_player_one) else playerTextures[1]
+
+func reset_player():
+	# set player to unmodified state
+	has_power_up = false
+
+func check_for_powerups(delta):
+	if has_power_up:
+		powerup_elapsed_time += delta
+		if powerup_elapsed_time >= powerup_duration:
+			reset_player()
+			powerup_elapsed_time = 0
+			print("removed powerup")
 
 func _input(event):
    # Mouse in viewport coordinates
@@ -202,3 +220,21 @@ func playerOneRecovered():
 func playerTwoRecovered():
 	isPlayerTwoStunned = false
 
+func activatePowerup(type : int):
+	# Set different powerup abilities based on the type that's passed in
+	if type == 0:
+		return
+	has_power_up = true
+	if type == 1:
+		print("Got powerup")
+		powerup_duration = 2.0
+		# invulnerability
+		pass
+	elif type == 2:
+		# speed
+		powerup_duration = 5.0 
+		pass
+	elif type == 3:
+		#shotgun
+		powerup_duration = 5.0
+		pass

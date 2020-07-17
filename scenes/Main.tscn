@@ -37,14 +37,12 @@ visible = false
 position = Vector2( 238.875, 475.596 )
 is_player_one = true
 update = true
-playerMovementSpeed = 240
 
 [node name="PlayerTwo" parent="." instance=ExtResource( 2 )]
 visible = false
 position = Vector2( 794.818, 119.26 )
 texture = ExtResource( 3 )
 update = true
-playerMovementSpeed = 240
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
