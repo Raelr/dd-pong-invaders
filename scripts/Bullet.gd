@@ -15,6 +15,10 @@ func _physics_process(delta):
 		cos(rotation) * speed * delta, 
 		sin(rotation) * speed * delta
 	)
+	if (position.y < 100 or position.y > 490):
+		print("off bounds")
+		self.queue_free()
+	
 	if (player == "playerOne"):
 		if (position.x > 830):
 			print("scored player 2")
