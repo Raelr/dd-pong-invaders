@@ -2,8 +2,10 @@ extends Area2D
 
 export(int) var Speed = 1000
 
+
 var speed = 750
 var player
+
 
 func start(pos, dir, playerNumber):
 	rotation = dir
@@ -21,12 +23,18 @@ func _physics_process(delta):
 	
 	if (player == "playerOne"):
 		if (position.x > 830):
-			print("scored player 2")
+			print("Player 1 scored")
+			if (get_parent().get_child(2).lower_player_health(10, false) == 0):
+				get_parent().game_over("Player One")
+			
+			
 			self.queue_free()
 			get_parent().get_child(2).adjust(1,true)
 	else:
 		if (position.x < 200):
-			print("scored player 1")
+			print("Player 2 scored")
+			if (get_parent().get_child(2).lower_player_health(10, true) == 0):
+				get_parent().game_over("Player Two")
 			self.queue_free()
 			get_parent().get_child(2).adjust(1,false)
 
@@ -38,7 +46,7 @@ func isBullet():
 	
 func getBulletOwner():
 	return player
-
+	
 
 func _on_Bullet_area_entered(area):
 	print("disappear")

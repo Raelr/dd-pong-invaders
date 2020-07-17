@@ -18,6 +18,7 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="ButtonLabel" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
 margin_left = -89.7938
 margin_top = -85.1547
 margin_right = 88.2062
