@@ -11,6 +11,7 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 playerTextures = [ ExtResource( 1 ), ExtResource( 3 ) ]
+playerMovementSpeed = 240
 
 [node name="Player2D" type="Area2D" parent="."]
 

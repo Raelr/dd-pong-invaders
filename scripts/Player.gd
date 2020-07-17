@@ -14,13 +14,26 @@ var y_upper_boundary = 483.57
 var y_lower_boundary = 111.373
 var timer = 0
 
+var recoilTime = 1
+
 var Bullet = preload("res://scenes/Bullet.tscn")
 var canShoot = true
+
 var isPlayerOneStunned = false
 var isPlayerTwoStunned = false
 
-var isPlayerOneTrippleShot = true
-var isPlayerTwoTrippleShot = false
+var playerState = 0
+
+var has_power_up : bool = false
+var powerup_duration : float = 0.0
+var powerup_elapsed_time : float = 0.0
+
+#Build Barricade
+var barricade = preload("res://scenes/Barricade.tscn")
+var barricadev2 = preload("res://scenes/BarricadeV2.tscn")
+
+const max_barricade_P1 = 2
+const max_barricade_P2 = 2
 
 func _ready():
 	if (playerMovementSpeed == 0):
@@ -32,10 +45,29 @@ func _process(delta):
 	
 	if not is_paused and !Engine.editor_hint:
 		control_player(delta)
+		check_for_powerups(delta)
+		
+		if playerState == 2:
+			recoilTime = 0.5
 
 	if update:
 		if Engine.editor_hint:
 			texture = playerTextures[0] if (is_player_one) else playerTextures[1]
+
+func reset_player():
+	# set player to unmodified state
+	has_power_up = false
+	recoilTime = 1
+	playerState = 0
+	modulate = Color.white
+
+func check_for_powerups(delta):
+	if has_power_up:
+		powerup_elapsed_time += delta
+		if powerup_elapsed_time >= powerup_duration:
+			reset_player()
+			powerup_elapsed_time = 0
+			print("removed powerup")
 
 func _input(event):
    # Mouse in viewport coordinates
@@ -54,7 +86,7 @@ func debounceShot(angle, player):
 	if canShoot:
 		shootBullet(angle, player)
 		
-		var recoilTimer = recoilTimer(1, "onRecoilTimerStopped")
+		var recoilTimer = recoilTimer(recoilTime, "onRecoilTimerStopped")
 		recoilTimer.start()
 		canShoot = false
 
@@ -85,16 +117,10 @@ func trippleShot(angle, player):
 	get_parent().add_child(b3)
 
 func shootBullet(angle, player):
-	if player == "playerOne":
-		if isPlayerOneTrippleShot:
-			trippleShot(angle, player)
-		else:
-			singleShot(angle, player)
+	if playerState == 3:
+		trippleShot(angle, player)
 	else:
-		if isPlayerTwoTrippleShot:
-			trippleShot(angle, player)
-		else:
-			singleShot(angle, player)
+		singleShot(angle, player)
 
 func onRecoilTimerStopped():
 	canShoot = true
@@ -120,13 +146,6 @@ func control_player(delta):
 		spawn_barricade()
 	elif Input.is_action_just_pressed("playerTwoActive"):
 		spawn_barricade(false)
-
-#Build Barricade
-var barricade = preload("res://scenes/Barricade.tscn")
-var barricadev2 = preload("res://scenes/BarricadeV2.tscn")
-
-const max_barricade_P1 = 2
-const max_barricade_P2 = 2
 
 func spawn_barricade(p1 = true):
 	if is_player_one and p1:
@@ -181,20 +200,23 @@ func recoilTimer(time, callback):
 
 func _on_Player2D_area_entered(area):
 	if (is_player_one):
-		if (area.isBullet() and area.getBulletOwner() == "playerTwo"):			
-			var timer = recoilTimer(2, "playerOneRecovered")
-			timer.start()
-			isPlayerOneStunned = true
-			get_parent().player_one_stunned = true
+		if (area.getBulletOwner() == "playerTwo"):
+			if (playerState != 1):
+				var timer = recoilTimer(5, "playerOneRecovered")
+				timer.start()
+				isPlayerOneStunned = true
+				get_parent().player_one_stunned = true
+				
 			area.queue_free()
 	else:
-		if (area.isBullet() and area.getBulletOwner() == "playerOne"):
-			var timer = recoilTimer(2, "playerTwoRecovered")
-			timer.start()
-			isPlayerTwoStunned = true
-			get_parent().player_two_stunned = true
+		if (area.getBulletOwner() == "playerOne"):
+			if (playerState != 1):
+				var timer = recoilTimer(5, "playerTwoRecovered")
+				timer.start()
+				isPlayerTwoStunned = true
+				get_parent().player_two_stunned = true
+				
 			area.queue_free()
-	pass # Replace with function body.
 
 func playerOneRecovered():
 	isPlayerOneStunned = false
@@ -202,3 +224,22 @@ func playerOneRecovered():
 func playerTwoRecovered():
 	isPlayerTwoStunned = false
 
+func activatePowerup(type : int, player: String):
+	# Set different powerup abilities based on the type that's passed in
+	if type == 0:
+		return
+	has_power_up = true
+	playerState = type
+	
+	if type == 1:
+		# invulnerability
+		powerup_duration = 2.0
+		modulate = Color.yellow
+	elif type == 2:
+		# speed
+		powerup_duration = 5.0
+		modulate = Color.green
+	elif type == 3:
+		#shotgun
+		powerup_duration = 5.0
+		modulate = Color.crimson
