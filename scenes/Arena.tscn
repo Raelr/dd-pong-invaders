@@ -100,7 +100,7 @@ step = 10.0
 value = 100.0
 rounded = true
 texture_progress = ExtResource( 6 )
-fill_mode = 7
+fill_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
