@@ -4,6 +4,7 @@ export(int) var Speed = 1000
 
 var speed = 750
 var player
+var arena = load("res://scenes/Arena.tscn").instance()
 
 func start(pos, dir, playerNumber):
 	rotation = dir
@@ -17,11 +18,19 @@ func _physics_process(delta):
 	)
 	if (player == "playerOne"):
 		if (position.x > 830):
-			print("scored player 2")
+			print("Player 1 scored")
+			#$PlayerTwoHealth.value -= 10
+			
+			arena.lower_player_two_hp(10)
 			self.queue_free()
 	else:
 		if (position.x < 200):
-			print("scored player 1")
+			print("Player 2 scored")
+			#$PlayerOneHealth.value -= 10
+			#get_node($PlayerOneHealth).value -= 10
+			
+			arena.lower_player_one_hp(10)
+			print(arena.get_player_one_hp())
 			self.queue_free()
 
 func _on_Bullet_body_enter(body):
