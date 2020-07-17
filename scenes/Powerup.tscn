@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Powerup.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -13,6 +12,5 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Powerup" type="Sprite" parent="."]
-scale = Vector2( 0.34375, 0.328125 )
-texture = ExtResource( 1 )
+scale = Vector2( 2, 2 )
 [connection signal="area_entered" from="." to="." method="_on_Powerup_area_entered"]
