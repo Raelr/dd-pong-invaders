@@ -225,6 +225,7 @@ func activatePowerup(type : int):
 	if type == 0:
 		return
 	has_power_up = true
+	print(type)
 	if type == 1:
 		print("Got powerup")
 		powerup_duration = 2.0
