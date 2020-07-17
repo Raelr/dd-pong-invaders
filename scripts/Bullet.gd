@@ -23,10 +23,12 @@ func _physics_process(delta):
 		if (position.x > 830):
 			print("scored player 2")
 			self.queue_free()
+			get_parent().get_child(2).adjust(1,true)
 	else:
 		if (position.x < 200):
 			print("scored player 1")
 			self.queue_free()
+			get_parent().get_child(2).adjust(1,false)
 
 func _on_Bullet_body_enter(body):
 	print("yes")
