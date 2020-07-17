@@ -13,10 +13,7 @@ func start_game():
 	$PlayButton.monitoring = false
 	$PlayButton.monitoring = false
 	$QuitButton.visible = false
-	var main_menu = preload("res://scenes/Main.tscn")
-	var game = main_menu.instance()
-	add_child(game)
-	game.start()
+	spawn_game()
 
 func reactivate_menu():
 	$ColorRect.visible = true
@@ -25,6 +22,12 @@ func reactivate_menu():
 	$PlayButton.monitoring = true
 	$PlayButton.monitoring = true
 	$QuitButton.visible = true
+
+func spawn_game() -> void:
+	var main_menu = preload("res://scenes/Main.tscn")
+	var game = main_menu.instance()
+	add_child(game)
+	game.start()
 
 func exit_game():
 	get_tree().quit()

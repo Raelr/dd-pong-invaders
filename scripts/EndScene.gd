@@ -24,7 +24,8 @@ func go_to_main():
 	
 
 func reset_game():
-	pass
+	set_visible(false)
+	get_parent().spawn_game()
 
 func exit_game():
 	get_tree().quit()
