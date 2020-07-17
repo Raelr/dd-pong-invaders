@@ -18,6 +18,29 @@ func increment_player_timer(delta : float, is_player_one : bool) -> void:
 		$PlayerOneTimer.text = str(int(delta) + 1)
 	else:
 		$PlayerTwoTimer.text = str(int(delta) + 1)
+
+export (int) var paddingLength = 3
+var playerOneScore = 0
+var playerTwoScore = 0
+func _ready():
+	update()
+
+func reset():
+	playerOneScore = 0
+	playerTwoScore = 0
+	update()
+
+func adjust(adjustment, is_player_one : bool):
+	if is_player_one:
+		playerOneScore += adjustment
+	elif not is_player_one:
+		playerTwoScore += adjustment
+	update()
+
+func update():
+	$PlayerOneScore.text = ("%*d" % [paddingLength, playerOneScore])
+	$PlayerTwoScore.text = ("%*d" % [paddingLength, playerTwoScore])
+
 		
 func lower_player_health(damage : int, isPlayerOne : bool):
 	if (isPlayerOne):
@@ -26,7 +49,4 @@ func lower_player_health(damage : int, isPlayerOne : bool):
 	else:
 		$PlayerTwoHealth.value -= damage
 		return $PlayerTwoHealth.value
-		
 
-
-	
