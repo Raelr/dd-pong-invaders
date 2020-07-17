@@ -37,7 +37,7 @@ func power_up_generate():
 	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var type = rng.randf_range(0, 3)
+	var type = rng.randf_range(1, 4)
 	
 	powerup.position = V2
 	powerup.start(type, 5.0)

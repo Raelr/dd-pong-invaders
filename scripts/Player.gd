@@ -59,6 +59,7 @@ func reset_player():
 	has_power_up = false
 	recoilTime = 1
 	playerState = 0
+	modulate = Color.white
 
 func check_for_powerups(delta):
 	if has_power_up:
@@ -228,15 +229,17 @@ func activatePowerup(type : int, player: String):
 	if type == 0:
 		return
 	has_power_up = true
-	
 	playerState = type
 	
 	if type == 1:
 		# invulnerability
 		powerup_duration = 2.0
+		modulate = Color.yellow
 	elif type == 2:
 		# speed
 		powerup_duration = 5.0
+		modulate = Color.green
 	elif type == 3:
 		#shotgun
 		powerup_duration = 5.0
+		modulate = Color.crimson
