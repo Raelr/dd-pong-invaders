@@ -19,6 +19,9 @@ var canShoot = true
 var isPlayerOneStunned = false
 var isPlayerTwoStunned = false
 
+var isPlayerOneTrippleShot = true
+var isPlayerTwoTrippleShot = false
+
 func _ready():
 	if (playerMovementSpeed == 0):
 		playerMovementSpeed = 240 #default value for player movement speed
@@ -33,6 +36,11 @@ func _process(delta):
 	if update:
 		if Engine.editor_hint:
 			texture = playerTextures[0] if (is_player_one) else playerTextures[1]
+
+func _input(event):
+   # Mouse in viewport coordinates
+   if event is InputEventMouseButton:
+	   print("Mouse Click/Unclick at: ", event.position)
 
 func catchUserShootInput():
 	if (is_player_one):
@@ -50,8 +58,7 @@ func debounceShot(angle, player):
 		recoilTimer.start()
 		canShoot = false
 
-
-func shootBullet(angle, player):
+func singleShot(angle, player):
 	var bullet = Bullet.instance()
 	
 	bullet.speed += bullet_time_multiplier
@@ -59,6 +66,35 @@ func shootBullet(angle, player):
 	bullet.start(global_position, angle, player)
 	
 	get_parent().add_child(bullet)
+
+func trippleShot(angle, player):
+	var b1 = Bullet.instance()
+	var b2 = Bullet.instance()
+	var b3 = Bullet.instance()
+	
+	b1.speed += bullet_time_multiplier
+	b2.speed += bullet_time_multiplier
+	b3.speed += bullet_time_multiplier
+	
+	b1.start(global_position, angle - PI / 12, player) # top
+	b2.start(global_position, angle, player) # middle
+	b3.start(global_position, angle + PI / 12, player) # bottom
+	
+	get_parent().add_child(b1)
+	get_parent().add_child(b2)
+	get_parent().add_child(b3)
+
+func shootBullet(angle, player):
+	if player == "playerOne":
+		if isPlayerOneTrippleShot:
+			trippleShot(angle, player)
+		else:
+			singleShot(angle, player)
+	else:
+		if isPlayerTwoTrippleShot:
+			trippleShot(angle, player)
+		else:
+			singleShot(angle, player)
 
 func onRecoilTimerStopped():
 	canShoot = true
@@ -80,7 +116,53 @@ func control_player(delta):
 		elif Input.is_key_pressed(KEY_K) and not Input.is_key_pressed(KEY_I):
 			if (self.position.y < y_upper_boundary):
 				self.position.y += playerMovementSpeed * delta
-			
+	if Input.is_action_just_pressed("playerActive"):
+		spawn_barricade()
+	elif Input.is_action_just_pressed("playerTwoActive"):
+		spawn_barricade(false)
+
+#Build Barricade
+var barricade = preload("res://scenes/Barricade.tscn")
+var barricadev2 = preload("res://scenes/BarricadeV2.tscn")
+
+const max_barricade_P1 = 2
+const max_barricade_P2 = 2
+
+func spawn_barricade(p1 = true):
+	if is_player_one and p1:
+		var barricade_count = []
+		var player_position = transform.origin
+		var barricade_instance = barricade.instance()
+		var spawn_position = Vector2()
+		get_tree().get_root().add_child(barricade_instance)
+		if (get_tree().get_nodes_in_group("barricade").size()) <= max_barricade_P1:
+			spawn_position.x = 300
+			spawn_position.y = player_position.y
+			barricade_instance.transform.origin = spawn_position
+			print(spawn_position)
+			barricade_count.append(barricade_instance)
+		else:
+			print("No more barricades")
+#		spawn_position.x = 300
+#		spawn_position.y = player_position.y
+#		barricade_instance.transform.origin = spawn_position
+#		print(spawn_position)
+		
+	elif not is_player_one and not p1:
+		var barricadev2_count = []
+		var player_position = transform.origin
+		var barricadev2_instance = barricadev2.instance()
+		var spawn_position = Vector2()
+		get_tree().get_root().add_child(barricadev2_instance)
+		if (get_tree().get_nodes_in_group("barricadev2").size()) <= max_barricade_P2:
+			spawn_position.x = 730
+			spawn_position.y = player_position.y
+			barricadev2_instance.transform.origin = spawn_position
+			print(spawn_position)
+			barricadev2_count.append(barricadev2_instance)
+		else:
+			print("No more barricades")
+
 #Speed increased by every minute
 func increase_speed():
 	playerMovementSpeed += 50
@@ -96,7 +178,6 @@ func recoilTimer(time, callback):
 	self.add_child(timer)
 	
 	return timer
-
 
 func _on_Player2D_area_entered(area):
 	if (is_player_one):

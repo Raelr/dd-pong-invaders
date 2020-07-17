@@ -2,16 +2,16 @@ extends Node2D
 
 var screen_size
 var extents
-var textures = {'1':['res://sprites/haystack.png'],
-				'2':['res://sprites/wood.png']}
+#var textures = {'1':['res://sprites/haystack.png'],
+#				'2':['res://sprites/wood.png']}
 
 func _ready():
 	add_to_group("barricade")
-	init('1')
+#	init('1')
 	
-func init(level):
-	var texture = load(textures[level])
-	get_node("barricade").set_texture(texture)
+#func init(level):
+#	var texture = load(textures[level])
+#	get_node("barricade").set_texture(texture)
 	
 func explode():
 	queue_free()
@@ -42,3 +42,9 @@ func explode():
 #		queue_free()
 #		body.explode()
 
+
+
+func _on_Barricade_area_entered(area):
+	if area.isBullet() and area.getBulletOwner() == "playerTwo":
+		self.queue_free()
+		area.queue_free()
